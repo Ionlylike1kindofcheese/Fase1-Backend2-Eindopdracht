@@ -14,7 +14,7 @@
   </nav>
   <main>
     <h2>Er heerst paniek...</h2>
-    <form method="post">
+    <form method="post" id="form">
       <div class="fields">
         <label for="field1">Welke dier zou je nooit als huisdier willen hebben?</label>
         <input type="text" name="field1" required>
@@ -49,6 +49,35 @@
       </div>
       <button type="submit" name="submitButton">Versturen</button>
     </form>
+    <section>
+      <?php
+      function test_input($data) {
+        $data = htmlspecialchars($data);
+        $data = trim($data);
+        $data = stripslashes($data);
+
+        return $data;
+      }
+
+      if (isset($_POST['submitButton'])) {
+        $fieldArray = [];
+        foreach ($_POST as $key => $value) {
+          $fieldArray[$key] = test_input($value);
+        }
+        echo '<style type="text/css">#form {display: none;}</style>';
+        echo "<p>Er heerst paniek in koninkrijk " . $fieldArray['field3'] . ". Koning " . $fieldArray['field6'] . " is ten einde raad en als Koning
+        " . $fieldArray['field6'] . " ten einde raad is, dan roept hij zijn ten-einde-raadsheer " . $fieldArray['field2'] . ".<br>
+        \"" . $fieldArray['field2'] . "! Het is een ramp! Het is een schande!\" <br>
+        \"Sire, Majesteit, Uwe Luidruchtigheid, wat is er aan de hand?\" <br>
+        \"Mijn " . $fieldArray['field1'] . " is verdwenen! Zo maar, zonder waarschuwing. En ik had net " . $fieldArray['field5'] . " voor hem gekocht!\" <br>
+        \"Majesteit, uw " . $fieldArray['field1'] . " komt vast wel vanzelf weer terug?\" <br>
+        \"Ja. da's leuk en aardig, maar hoe moet ik in de tussentijd " . $fieldArray['field8'] . " leren?\" <br> 
+        \"Maar Sire, daar kunt u toch uw " . $fieldArray['field7'] . " voor gebruiken.\" <br> 
+        \"" . $fieldArray['field2'] . ", je hebt helemaal gelijk! Wat zou ik doen als ik jou niet had.\" <br> 
+        \"" . $fieldArray['field4'] . ", Sire.\"";
+      }
+      ?>
+    </section>
   </main>
   <footer>
     <p>© Deze website is gemaakt door Robin Vervoorn ©</p>

@@ -14,7 +14,7 @@
   </nav>
   <main>
     <h2>Onkunde</h2>
-    <form method="post">
+    <form method="post" id="form">
       <div class="fields">
         <label for="field1">Wat zou je graag willen kunnen?</label>
         <input type="text" name="field1" required>
@@ -45,6 +45,30 @@
       </div>
       <button type="submit" name="submitButton">Versturen</button>
     </form>
+    <section>
+      <?php
+      function test_input($data) {
+        $data = htmlspecialchars($data);
+        $data = trim($data);
+        $data = stripslashes($data);
+
+        return $data;
+      }
+
+      if (isset($_POST['submitButton'])) {
+        $fieldArray = [];
+        foreach ($_POST as $key => $value) {
+          $fieldArray[$key] = test_input($value);
+        }
+        echo '<style type="text/css">#form {display: none;}</style>';
+        echo "<p>Er zijn veel mensen die niet kunnen " . $fieldArray['field1'] . ". Neem nou " . $fieldArray['field2'] . ". Zelfs met de hulp
+        van een " . $fieldArray['field4'] . " of zelfs " . $fieldArray['field3'] . " kan " . $fieldArray['field2'] . " niet " . $fieldArray['field1'] . ". 
+        Dat heeft niet te maken met een gebrek aan " . $fieldArray['field5'] . ", maar met een te veel aan " . $fieldArray['field6'] . ". 
+        Te veel " . $fieldArray['field6'] . " leidt tot " . $fieldArray['field7'] . " en dat is niet goed als je wilt " . $fieldArray['field1'] . ". 
+        Helaas voor " . $fieldArray['field2'] . "</p>";
+      }
+      ?>
+    </section>
   </main>
   <footer>
     <p>© Deze website is gemaakt door Robin Vervoorn ©</p>
